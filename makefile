@@ -1,13 +1,19 @@
-bin/%.class: src/%.java
-	javac -g -d bin -cp src:bin src/$*.java
+JAVAC=/usr/bin/javac
+SRC=src
+BIN=bin
 
-median.jar: bin/cs252/TestMedian.class bin/cs252/Median.class
-	jar cfe $@ cs252.TestMedian -C bin/ .
+all: Median.jar
 
-bin/cs252/TestMedian.class: src/cs252/TestMedian.java bin/cs252/Median.class
+bin/cs252/%.class: $(SRC)/cs252/%.java
+	mkdir -p $(@D)
+	$(JAVAC) -g -d $(BIN) -cp $(SRC):$(BIN) $<
 
-run: median.jar
-	java -jar median.jar
+Median.jar: bin/cs252/TestMedian.class bin/cs252/Median.class
+	jar cfe $@ cs252.TestMedian -C bin cs252
+
+run: Median.jar
+	java -jar $<
 
 clean:
-	rm -r median.jar bin
+	-rm -rf Median.jar bin
+
