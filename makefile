@@ -30,7 +30,7 @@ clean:
 help:
 	@echo "Available rules:"
 	@echo "  all   - Build the JAR file (default rule)."
-	@echo "  run   - Run the JAR file with default or specified number of tests (make run TESTS=10)."
+	@echo "  run   - Run the JAR file with default or specified number of tests."
 	@echo "  clean - Remove all generated files."
 	@echo "  help  - Display this help message."
 
